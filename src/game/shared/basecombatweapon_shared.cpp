@@ -1342,11 +1342,13 @@ bool CBaseCombatWeapon::IsWeaponVisible( void )
 //-----------------------------------------------------------------------------
 bool CBaseCombatWeapon::ReloadOrSwitchWeapons( void )
 {
+	/* No automatic reloads - MODIFIED
 	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
 	Assert( pOwner );
 
 	m_bFireOnEmpty = false;
 
+	
 	// If we don't have any ammo, switch to the next best weapon
 	if ( !HasAnyAmmo() && m_flNextPrimaryAttack < gpGlobals->curtime && m_flNextSecondaryAttack < gpGlobals->curtime )
 	{
@@ -1371,6 +1373,7 @@ bool CBaseCombatWeapon::ReloadOrSwitchWeapons( void )
 				return true;
 		}
 	}
+	*/
 
 	return false;
 }
@@ -2239,12 +2242,12 @@ void CBaseCombatWeapon::UpdateAutoFire( void )
 //-----------------------------------------------------------------------------
 void CBaseCombatWeapon::PrimaryAttack( void )
 {
-	// If my clip is empty (and I use clips) start reload
 	if ( UsesClipsForAmmo1() && !m_iClip1 ) 
 	{
-		Reload();
+		Reload(); 
 		return;
 	}
+	
 
 	// Only the player fires this way so we can cast
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );

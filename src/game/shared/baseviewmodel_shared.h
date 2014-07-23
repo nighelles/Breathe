@@ -32,7 +32,6 @@ class CBaseViewModel : public CBaseAnimating, public IHasOwner
 {
 	DECLARE_CLASS( CBaseViewModel, CBaseAnimating );
 public:
-
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
 

@@ -16,7 +16,7 @@
 
 #include "weapon_hl2mpbasehlmpcombatweapon.h"
 
-#define	PISTOL_FASTEST_REFIRE_TIME		0.05f
+#define	PISTOL_FASTEST_REFIRE_TIME		0.1f
 #define	PISTOL_FASTEST_DRY_REFIRE_TIME	0.2f
 
 #define	PISTOL_ACCURACY_SHOT_PENALTY_TIME		0.2f	// Applied amount of time each shot adds to the time we must recover from
@@ -47,6 +47,7 @@ public:
 	void	PrimaryAttack( void );
 	void	AddViewKick( void );
 	void	DryFire( void );
+
 
 	void	UpdatePenaltyTime( void );
 
@@ -207,7 +208,7 @@ void CWeaponPistol::PrimaryAttack( void )
 		// the aim from 'drifting off' when the player fires very quickly. This may
 		// not be the ideal way to achieve this, but it's cheap and it works, which is
 		// great for a feature we're evaluating. (sjb)
-		//pOwner->ViewPunchReset();
+		pOwner->ViewPunchReset();
 	}
 
 	BaseClass::PrimaryAttack();
@@ -260,7 +261,7 @@ void CWeaponPistol::ItemBusyFrame( void )
 void CWeaponPistol::ItemPostFrame( void )
 {
 	BaseClass::ItemPostFrame();
-	/*
+	
 	if ( m_bInReload )
 		return;
 	
@@ -285,7 +286,7 @@ void CWeaponPistol::ItemPostFrame( void )
 	{
 		DryFire();
 	}
-	*/
+	
 }
 
 //-----------------------------------------------------------------------------
@@ -318,6 +319,7 @@ bool CWeaponPistol::Reload( void )
 	}
 	return fRet;
 }
+
 
 //-----------------------------------------------------------------------------
 // Purpose: 
