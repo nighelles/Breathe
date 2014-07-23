@@ -105,6 +105,18 @@ CTeamMenu::~CTeamMenu()
 {
 }
 
+
+void CTeamMenu::OnCommand(const char *command)
+{
+	if (Q_stricmp(command, "vguicancel"))
+	{
+		engine->ClientCmd(const_cast<char *>(command));
+	}
+	Close();
+	gViewPortInterface->ShowBackGround(false);
+	BaseClass::OnCommand(command);
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: sets the text color of the map description field
 //-----------------------------------------------------------------------------

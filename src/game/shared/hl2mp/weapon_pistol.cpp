@@ -48,6 +48,8 @@ public:
 	void	AddViewKick( void );
 	void	DryFire( void );
 
+	void    WeaponIdle(void);
+
 
 	void	UpdatePenaltyTime( void );
 
@@ -181,6 +183,15 @@ void CWeaponPistol::DryFire( void )
 	
 	m_flSoonestPrimaryAttack	= gpGlobals->curtime + PISTOL_FASTEST_DRY_REFIRE_TIME;
 	m_flNextPrimaryAttack		= gpGlobals->curtime + SequenceDuration();
+}
+
+void CWeaponPistol::WeaponIdle(void)
+{
+	if (m_iClip1 <= 0) // we have to maintain the slide back
+	{
+		SendWeaponAnim(ACT_VM_DRYFIRE);
+	}
+	BaseClass::WeaponIdle();
 }
 
 //-----------------------------------------------------------------------------

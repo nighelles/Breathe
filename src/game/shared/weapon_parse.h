@@ -130,6 +130,10 @@ public:
 
 // SERVER DLL
 
+// IRONSIGHTS
+	Vector					vecIronsightPosOffset;
+	QAngle					angIronsightAngOffset;
+	float					flIronsightFOVOffset;
 };
 
 // The weapon parse function

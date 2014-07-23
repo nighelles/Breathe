@@ -232,7 +232,7 @@ void CHL2MP_Player::GiveDefaultItems( void )
 	}
 }
 
-void CHL2MP_Player::PickDefaultSpawnTeam( void )
+/*void CHL2MP_Player::PickDefaultSpawnTeam( void )
 {
 	if ( GetTeamNumber() == 0 )
 	{
@@ -278,6 +278,24 @@ void CHL2MP_Player::PickDefaultSpawnTeam( void )
 					ChangeTeam( random->RandomInt( TEAM_COMBINE, TEAM_REBELS ) );
 				}
 			}
+		}
+	}
+}*/
+
+void CHL2MP_Player::PickDefaultSpawnTeam(void)
+{
+	if (GetTeamNumber() == 0)
+	{
+		if (HL2MPRules()->IsTeamplay() == false)
+		{
+			if (GetModelPtr() == NULL)
+			{
+				ChangeTeam(TEAM_UNASSIGNED);
+			}
+		}
+		else
+		{
+			ChangeTeam(TEAM_SPECTATOR);
 		}
 	}
 }
@@ -331,6 +349,16 @@ void CHL2MP_Player::Spawn(void)
 	SetPlayerUnderwater(false);
 
 	m_bReady = false;
+
+	if (GetTeamNumber() != TEAM_SPECTATOR)
+	{
+		StopObserverMode();
+	}
+	else
+	{
+		//if we are a spectator then go into roaming mode
+		StartObserverMode(OBS_MODE_ROAMING);
+	}
 }
 
 void CHL2MP_Player::PickupObject( CBaseEntity *pObject, bool bLimitMassAndSize )
